@@ -11,10 +11,12 @@ import process from 'process';
 import ClientMgr from '../clientMgr.js';
 import { REQUEST_PROCESSING_STATUS } from '../constants.js';
 import emailService from '../emailService.js';
+import emailService from '../emailService.js';
 
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
   const results = await provisionRequestMgr.findNewProvisionRequests();
+  const sendemailService= new emailService();
 
   if (results.rowCount <= 0) {
     process.exit();
@@ -46,7 +48,7 @@ export async function provisionSandBoxes() {
         provisionRequest.id,
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
-      await emailService.sendMail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
+      await sendemailService.sendHtmlEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
       await clientMgr.updateConnectedAppWithSandboxDetails(
         provisionRequest.id,
         {
