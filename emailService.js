@@ -17,6 +17,7 @@ import nodemailer from 'nodemailer';
       subject,
       html: htmlContent
     };
+    console.log('I am in the HTML Email');
 
     this.transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
