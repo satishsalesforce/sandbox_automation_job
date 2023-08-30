@@ -47,7 +47,7 @@ export async function provisionSandBoxes() {
         provisionRequest.id,
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
-      await EmailHelper.sendEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
+      await EmailHelper.sendHtmlEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
       await clientMgr.updateConnectedAppWithSandboxDetails(
         provisionRequest.id,
         {
