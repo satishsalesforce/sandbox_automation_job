@@ -1,5 +1,4 @@
-const nodemailer = require('nodemailer');
-
+import nodemailer from 'nodemailer';
 export default class EmailHelper {
   constructor() {
     this.transporter = nodemailer.createTransport({
