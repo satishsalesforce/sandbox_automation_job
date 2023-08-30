@@ -10,16 +10,12 @@ import SandboxMgr from '../sandboxMgr.js';
 import process from 'process';
 import ClientMgr from '../clientMgr.js';
 import { REQUEST_PROCESSING_STATUS } from '../constants.js';
-
-
+import EmailHelper from '../emailService.js';
 
 
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
   const results = await provisionRequestMgr.findNewProvisionRequests();
-  const emailService = require('./emailService');
-
-  const info = await mailer.sendHtmlEmail
 
   if (results.rowCount <= 0) {
     process.exit();
@@ -58,7 +54,7 @@ export async function provisionSandBoxes() {
           message__c: `Sandbox Not Provisioned Since User ${element.email_address} Already Exists`,
         }
       );
-      await emailService.sendEmail('sanandhan@salesforce.com', 'Notification', 'Hello from my module');
+      await EmailHelper.sendEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
     } else {
       const sandboxMgr = new SandboxMgr();
       const sandboxDetails = await sandboxMgr.provisionNewSandbox(
