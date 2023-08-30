@@ -11,9 +11,15 @@ import process from 'process';
 import ClientMgr from '../clientMgr.js';
 import { REQUEST_PROCESSING_STATUS } from '../constants.js';
 
+
+
+
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
   const results = await provisionRequestMgr.findNewProvisionRequests();
+  const emailService = require('./emailService');
+
+  const info = await mailer.sendHtmlEmail
 
   if (results.rowCount <= 0) {
     process.exit();
@@ -34,6 +40,7 @@ export async function provisionSandBoxes() {
     };
 
     const clientMgr = new ClientMgr();
+    
     const userExists = await clientMgr.isUserExists(element.email_address);
 
     if (userExists) {
@@ -51,6 +58,7 @@ export async function provisionSandBoxes() {
           message__c: `Sandbox Not Provisioned Since User ${element.email_address} Already Exists`,
         }
       );
+      await emailService.sendEmail('sanandhan@salesforce.com', 'Notification', 'Hello from my module');
     } else {
       const sandboxMgr = new SandboxMgr();
       const sandboxDetails = await sandboxMgr.provisionNewSandbox(
@@ -70,6 +78,22 @@ export async function provisionSandBoxes() {
   }
 
   process.exit();
+
+  
 }
 
 provisionSandBoxes();
+
+class MyModule {
+  async sendNotification() {
+    try {
+      const info = await emailService.sendEmail('sanandhan@salesforce.com', 'Notification', 'Hello from my module');
+      console.log('Email sent:', info.response);
+    } catch (error) {
+      console.log('Error sending email:', error);
+    }
+  }
+}
+
+const myInstance = new MyModule();
+
