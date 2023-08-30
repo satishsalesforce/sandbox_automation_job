@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-export default class EmailHelper {
+ export default class emailService {
   constructor() {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail', // Update with your email service
@@ -10,7 +10,7 @@ export default class EmailHelper {
     });
   }
 
-  sendHtmlEmail(to, subject, htmlContent) {
+  async sendHtmlEmail(to, subject, htmlContent) {
     const mailOptions = {
       from: 'your_email@example.com',
       to,
