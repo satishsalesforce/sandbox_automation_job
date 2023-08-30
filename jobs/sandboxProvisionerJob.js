@@ -11,7 +11,6 @@ import process from 'process';
 import ClientMgr from '../clientMgr.js';
 import { REQUEST_PROCESSING_STATUS } from '../constants.js';
 import emailService from '../emailService.js';
-import emailService from '../emailService.js';
 
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
