@@ -47,6 +47,7 @@ export async function provisionSandBoxes() {
         provisionRequest.id,
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
+      await EmailHelper.sendEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
       await clientMgr.updateConnectedAppWithSandboxDetails(
         provisionRequest.id,
         {
@@ -54,7 +55,7 @@ export async function provisionSandBoxes() {
           message__c: `Sandbox Not Provisioned Since User ${element.email_address} Already Exists`,
         }
       );
-      await EmailHelper.sendEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
+      
     } else {
       const sandboxMgr = new SandboxMgr();
       const sandboxDetails = await sandboxMgr.provisionNewSandbox(
