@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-class EmailHelper {
+export default class EmailHelper {
   constructor() {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail', // Update with your email service
@@ -29,4 +29,3 @@ class EmailHelper {
   }
 }
 
-module.exports = EmailHelper;
