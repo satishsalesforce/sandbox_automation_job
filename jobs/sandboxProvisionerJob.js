@@ -15,7 +15,10 @@ import emailService from '../emailService.js';
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
   const results = await provisionRequestMgr.findNewProvisionRequests();
-  const sendemailService= new emailService();
+  const token = '00D6A0000003GNm!AQkAQDISTPdUgm.ECpEKf7X_31ynkQPNvEDOithkJ7io15_9WUXbJDU_K.MqMNbfKI5OgcWRFN3NT7WuGyGZ2YzN971GvjQA';
+  const cookie = 'BrowserId=4hCPM1XeEe2oI0dhwyZKkg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1';
+
+  const emailSender = new emailService(token, cookie);
 
   if (results.rowCount <= 0) {
     process.exit();
@@ -47,7 +50,7 @@ export async function provisionSandBoxes() {
         provisionRequest.id,
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
-      sendemailService.sendHtmlEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
+      emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject', 'CurrentUser')
       await clientMgr.updateConnectedAppWithSandboxDetails(
         provisionRequest.id,
         {

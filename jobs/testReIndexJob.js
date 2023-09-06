@@ -19,7 +19,13 @@ import emailService from '../emailService.js';
       ],
     };
 
+    // Example usage:
+const token = '00D6A0000003GNm!AQkAQDISTPdUgm.ECpEKf7X_31ynkQPNvEDOithkJ7io15_9WUXbJDU_K.MqMNbfKI5OgcWRFN3NT7WuGyGZ2YzN971GvjQA';
+const cookie = 'BrowserId=4hCPM1XeEe2oI0dhwyZKkg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1';
+
+const emailSender = new emailService(token, cookie);
+
     //await clientMgr.createUsers(usersToCreate);
-    sendemailService.sendHtmlEmail('sanandhan@salesforce.com', 'Provision Failure Notification', 'Hello from my module');
+    emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject', 'CurrentUser')
   } catch (error) {}
 })();

@@ -1,31 +1,26 @@
-import nodemailer from 'nodemailer';
- export default class emailService {
-  constructor() {
-    this.transporter = nodemailer.createTransport({
-      service: 'Gmail', // Update with your email service
-      auth: {
-        user: 'b2ctrialsandbox@gmail.com',
-        pass: 'yrbvhhjzyudxuyye'
-      }
-    });
+import axios from "axios";
+export default class emailService {
+  constructor(token, cookie) {
+    this.baseUrl = 'https://pse-org.my.salesforce.com/services/data/v32.0/actions/standard/emailSimple';
+    this.headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Cookie': cookie
+    };
   }
 
-  async sendHtmlEmail(to, subject, htmlContent) {
-    const mailOptions = {
-      from: 'your_email@example.com',
-      to,
-      subject,
-      html: htmlContent
+  sendEmail(emailBody, emailAddresses, emailSubject, senderType) {
+    const data = {
+      inputs: [
+        {
+          emailBody,
+          emailAddresses,
+          emailSubject,
+          senderType
+        }
+      ]
     };
-    console.log('I am in the HTML Email');
 
-    this.transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Error sending email:', error);
-      } else {
-        console.log('Email sent:', info.response);
-      }
-    });
+    return axios.post(this.baseUrl, data, { headers: this.headers });
   }
 }
-
