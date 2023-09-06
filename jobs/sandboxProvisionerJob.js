@@ -51,6 +51,12 @@ export async function provisionSandBoxes() {
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
       emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject', 'CurrentUser')
+      .then(response => {
+        console.log('Email sent successfully. Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error sending email:', error);
+      });
       await clientMgr.updateConnectedAppWithSandboxDetails(
         provisionRequest.id,
         {
