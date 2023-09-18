@@ -50,7 +50,8 @@ export async function provisionSandBoxes() {
         provisionRequest.id,
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
-      emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject element.email_address', 'CurrentUser')
+      email=element.email_address
+      emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject `${email}`', 'CurrentUser')
       .then(response => {
         console.log('Email sent successfully. Response:', response.data);
       })
