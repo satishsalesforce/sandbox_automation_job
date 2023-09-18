@@ -20,7 +20,7 @@ import emailService from '../emailService.js';
     };
 
     // Example usage:
-const token = '00D6A0000003GNm!AQkAQDISTPdUgm.ECpEKf7X_31ynkQPNvEDOithkJ7io15_9WUXbJDU_K.MqMNbfKI5OgcWRFN3NT7WuGyGZ2YzN971GvjQA';
+const token = '00D6A0000003GNm!AQkAQA5fxfDULeQeYAnw5C_E8GETVXspg1f9QGn6EKj2K1wnpz1.6lYGB4w0AVAwNUpWIrR1z1a.Y1uaWWfWqZumtX1ONcUE';
 const cookie = 'BrowserId=4hCPM1XeEe2oI0dhwyZKkg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1';
 
 const emailSender = new emailService(token, cookie);
