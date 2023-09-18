@@ -15,7 +15,7 @@ import emailService from '../emailService.js';
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
   const results = await provisionRequestMgr.findNewProvisionRequests();
-  const token = '00D6A0000003GNm!AQkAQA5fxfDULeQeYAnw5C_E8GETVXspg1f9QGn6EKj2K1wnpz1.6lYGB4w0AVAwNUpWIrR1z1a.Y1uaWWfWqZumtX1ONcUE';
+  const token = '00D6A0000003GNm!AQkAQCOqgUOYowxrZpHm4AnkPYPlG70T72mK6dzVui_qyj7l1sDumk1S2MbZp3FMwtErb7MFo.s0n9TcSsl3w6WUDi_kyPnw';
   const cookie = 'BrowserId=4hCPM1XeEe2oI0dhwyZKkg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1';
 
   const emailSender = new emailService(token, cookie);
@@ -50,7 +50,7 @@ export async function provisionSandBoxes() {
         provisionRequest.id,
         REQUEST_PROCESSING_STATUS.NOTPROVISIONED
       );
-      emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject', 'CurrentUser')
+      emailSender.sendEmail('Email body', 'sanandhan@salesforce.com', 'Subject ${element.email_address}', 'CurrentUser')
       .then(response => {
         console.log('Email sent successfully. Response:', response.data);
       })
