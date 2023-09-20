@@ -15,7 +15,7 @@ import emailService from '../emailService.js';
 export async function provisionSandBoxes() {
   const provisionRequestMgr = new ProvisionRequestMgr();
   const results = await provisionRequestMgr.findNewProvisionRequests();
-  const token = '00D6A0000003GNm!AQkAQCOqgUOYowxrZpHm4AnkPYPlG70T72mK6dzVui_qyj7l1sDumk1S2MbZp3FMwtErb7MFo.s0n9TcSsl3w6WUDi_kyPnw';
+  const token = '00D6A0000003GNm!AQkAQH9CCd8ad8uIuCSdrHcTqhDj6gMim6yTz9muKIlPL9GoAq4WVe3Tx0aXlS6LeenE8Kcf_BG.qmw72lIqN4DoClaRB__a';
   const cookie = 'BrowserId=4hCPM1XeEe2oI0dhwyZKkg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1';
 
   const emailSender = new emailService(token, cookie);
